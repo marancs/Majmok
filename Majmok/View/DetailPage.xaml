@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:Majmok.ViewModel"
+             x:DataType="viewmodel:DetailViewModel"
+             x:Class="Majmok.View.DetailPage"
+             Title="{Binding M.Name, StringFormat='Majom: {0}'}">
+ <VerticalStackLayout>
+    <Border
+    HeightRequest="680"
+    WidthRequest="350"
+    BackgroundColor="{Binding Hatter}"
+    StrokeShape="RoundRectangle 30"   
+    VerticalOptions="Start"
+    HorizontalOptions="Center"        
+    >
+        <VerticalStackLayout>
+            <Border
+            HeightRequest="160"
+            WidthRequest="160"
+            StrokeShape="RoundRectangle 40"            
+            Margin="0,20,0,0"
+            >
+                <Image
+                Source="{Binding M.Image}"
+                WidthRequest="160"
+                HeightRequest="160"
+                />
+            </Border>
+            <Grid RowSpacing="5"
+              ColumnDefinitions="Auto,*"
+              RowDefinitions="Auto,*,*,*"              
+              Padding="10">
+                <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                Text="Leírás:"
+                FontAttributes="Bold"
+                FontSize="Medium"
+                HorizontalOptions="Start"
+                Margin="10,10,0,0"
+                HeightRequest="100"
+              />
+                <Label
+                Grid.Row="0"
+                Grid.Column="1"
+                Padding="10"
+                Text="{Binding M.Details}"
+                VerticalOptions="Center" 
+                HorizontalOptions="Start"
+                HeightRequest="100"
+                />
+                <Label
+                Grid.Row="1"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Padding="10"
+                FontSize="Medium"
+                FontAttributes="Bold"
+                Text="{Binding M.Population, StringFormat='Létszám:  {0} db'}"
+                VerticalOptions="Center" 
+                HorizontalOptions="Start"
+                HeightRequest="50"
+                />
+                <Label
+                Grid.Row="2"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                FontAttributes="Bold"
+                Padding="10"
+                FontSize="Medium"
+                Text="{Binding M.Location, StringFormat='Megtalálható: {0}'}"
+                VerticalOptions="Center" 
+                HorizontalOptions="Start"
+                HeightRequest="50"
+                />
+
+                <HorizontalStackLayout 
+                Grid.Row="3"
+                Grid.ColumnSpan="2"
+                Margin="0,-30,0,0"
+                Padding="10"
+                HorizontalOptions="Center">
+                    <Label
+                    FontSize="Medium"
+                    Text="{Binding M.Latitude, StringFormat='Pontosabban: {0}'}"
+                    VerticalOptions="Start"
+                    Margin="0,20,0,0"
+                    />
+                    <Label
+                    FontSize="Medium"
+                    Text=" - "
+                    Margin="0,20,0,0"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Start"                    
+                    />
+                    <Label
+                    FontSize="Medium"
+                    Margin="0,20,0,0"
+                    Text="{Binding M.Longitude}"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Start"                    
+                    />
+                </HorizontalStackLayout>
+            </Grid>
+        </VerticalStackLayout>
+    </Border>
+    <Button        
+        Text="Vissza"                 
+        HeightRequest="50"
+        WidthRequest="350"
+        HorizontalOptions="CenterAndExpand"
+        VerticalOptions="CenterAndExpand"
+        Margin="0,10,0,0"
+        CornerRadius="20"
+        BorderWidth="3"
+        BorderColor="Tomato"
+        Command="{Binding GoBackCommand}"
+         />
+    </VerticalStackLayout>
+</ContentPage>
