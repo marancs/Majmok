@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:Majmok.Model"
+             xmlns:viewmodel="clr-namespace:Majmok.ViewModel"
+             x:DataType="viewmodel:A_ListaViewModel"
+             x:Class="Majmok.View.A_ListaView">
+
+    <Grid
+    ColumnDefinitions="*"
+    ColumnSpacing="5"
+    RowDefinitions="*,Auto"
+    BackgroundColor="Aqua">
+        <CollectionView
+        ItemsSource="{Binding MajmokLista}"
+        SelectionMode="None">
+            <CollectionView.EmptyView>
+                <StackLayout Padding="100">
+                    <Image HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       HeightRequest="160"
+                       WidthRequest="160"
+                       Source="nodata.png" />
+                </StackLayout>
+            </CollectionView.EmptyView>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:Monkey">
+                    <SwipeView>
+                        <SwipeView.LeftItems>
+                            <SwipeItem Text="Részletek"
+                                   BackgroundColor="BlueViolet"
+                                   CommandParameter="{Binding .}"
+                                   Command="{Binding Source={
+                                                            RelativeSource AncestorType={
+                                                                    x:Type viewmodel:MainViewModel
+                                                                }
+                                                            },Path=GoToDetailsCommand
+                                             }"
+                                   />
+                        </SwipeView.LeftItems>
+                        <Grid Padding="10" HorizontalOptions="Fill">
+                            <Frame HeightRequest="125"
+                               Style="{StaticResource CardView}">
+                                <Grid Padding="0" ColumnDefinitions="125,*">
+                                    <Image
+                                    Aspect="AspectFill"
+                                    HeightRequest="125"
+                                    WidthRequest="125"
+                                    Source="{Binding Image}"/>
+                                    <VerticalStackLayout
+                                    VerticalOptions="Center"
+                                    Grid.Column="1"
+                                    Padding="10">
+                                        <Label Style="{StaticResource MediumLabel}"
+                                           Text="{Binding Name}"/>
+                                        <Label Style="{StaticResource MediumLabel}"
+                                           Text="{Binding Location}"/>
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </Frame>
+                        </Grid>
+                    </SwipeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Button
+        Grid.Row="1"
+        Grid.Column="0"
+        Margin="8"
+        Text="Kérem a majmokat!"
+        IsEnabled="{Binding IsNotBusy}"
+        Command="{Binding GetMonkeysCommand}"/>
+
+        <ActivityIndicator
+        Grid.RowSpan="2"
+        Grid.Column="0"
+        HorizontalOptions="Fill"
+        VerticalOptions="Center"
+        Color="{StaticResource Primary}"
+        IsRunning="{Binding IsBusy}"
+        IsVisible="{Binding IsBusy}"/>
+    </Grid>
+</ContentView>
