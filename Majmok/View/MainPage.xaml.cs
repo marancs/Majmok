@@ -12,7 +12,7 @@ public partial class MainPage : ContentPage
 		}
 		else if (DeviceInfo.Platform == DevicePlatform.WinUI)
 		{
-			layout.Add(new W_ListaView(new W_ListaViewModel()));
+			layout.Add(new W_ListaView(new W_ListaViewModel( new MonkeyService())));
 		}
 
 	}

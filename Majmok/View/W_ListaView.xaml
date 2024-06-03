@@ -4,11 +4,40 @@
              xmlns:model="clr-namespace:Majmok.Model"
              xmlns:viewmodel="clr-namespace:Majmok.ViewModel"
              x:DataType="viewmodel:W_ListaViewModel"
-             x:Class="Majmok.View.W_ListaView">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             x:Class="Majmok.View.W_ListaView"
+            Loaded="ContentView_Loaded">
+<ScrollView VerticalScrollBarVisibility="Always">
+<Grid RowDefinitions="50,*"
+      ColumnDefinitions="*"
+      WidthRequest="800"
+      HeightRequest="800"
+      VerticalOptions="FillAndExpand">
+            <Label HeightRequest="50" Grid.Row="0" Text="Majmok lista"/>
+            <CollectionView VerticalScrollBarVisibility="Always"
+                            ItemsSource="{Binding MajmokLista}"
+                            Grid.Row="1">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Monkey">
+                        <Grid ColumnDefinitions="*,*,*,*"
+                              ColumnSpacing="5"
+                              RowSpacing="20">
+                            <Label Text="{Binding Name}"
+                                   Grid.Column="0"
+                                   WidthRequest="100"
+                                   FontSize="Small"/>
+                            <Label Text="{Binding Population}"
+                                   Grid.Column="1"
+                                   FontSize="Small"/>
+                            <Label Text="{Binding Location}"
+                                   Grid.Column="2"
+                                   FontSize="Micro"/>
+                            <Label Text="{Binding Details}"
+                                   Grid.Column="3"
+                                   FontSize="Micro"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </ScrollView>
 </ContentView>
