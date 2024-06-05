@@ -9,7 +9,7 @@ namespace Majmok.Services
 #if DEBUG
     #if ANDROID
         public static readonly string URL = "http://10.0.2.2:3000/{0}";
-    #elif WINDOWS
+    #else
         public static readonly string URL = "http://localhost:3000/{0}";
     #endif
 #else
